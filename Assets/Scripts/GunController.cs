@@ -15,6 +15,10 @@ public class GunController : MonoBehaviour
     private float m_bulletSpeed = 1000f; //弾の速度
     private int m_bulletCost = 10; //一度の射撃での消費弾数
     private int[] m_ammoValue = new int[3]; //残弾(0r,1g,2b)
+    private float m_recoveryTime = 1.0f; //残弾が回復する時間
+    private int m_recoveryValue = 10; //残弾の回復量
+    private float[] m_timeElapsed = new float[3]; //色ごとの時間経過、これが貯まると残弾が回復
+
    
 
     //UI関係
@@ -52,7 +56,23 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i = 0; i < 3; i++)
+        {
+            //残弾回復処理
+            if (m_ammoValue[i] < 255)
+            {
+                m_timeElapsed[i] += Time.deltaTime; //時間経過で回復
+                //一定時間経過で残弾を回復させ、UIの更新
+                if(m_timeElapsed[i] >= m_recoveryTime)
+                {
+                    m_ammoValue[i] += m_recoveryValue;
+                    m_timeElapsed[i] = 0f;
+
+                    m_uiController.ChangeAmmoUI(m_ammoValue[i],i);
+                }
+            }
+
+        }
     }
 
     //砲台回転関数

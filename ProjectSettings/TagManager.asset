@@ -13,6 +13,9 @@ TagManager:
   - AmmoGauge_Red
   - AmmoGauge_Green
   - AmmoGauge_Blue
+  - RedBullet
+  - GreenBullet
+  - BlueBullet
   layers:
   - Default
   - TransparentFX

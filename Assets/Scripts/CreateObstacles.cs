@@ -51,12 +51,14 @@ public class CreateObstacles : MonoBehaviour
             for (int j = 0; j < 10; j++)
             {
                 //ランダムに色を決定して生成
-                int obsR = Random.Range(0, 26) * 10;
-                int obsG = Random.Range(0, 26) * 10;
-                int obsB = Random.Range(0, 26) * 10;
+                int R = Random.Range(0, 26) * 10;
+                int G = Random.Range(0, 26) * 10;
+                int B = Random.Range(0, 26) * 10;
+               
 
                 GameObject obstacle = Instantiate(m_obstacle, obsPos + obsDistance * j, Quaternion.Euler(obsAngle));
-                obstacle.GetComponent<Renderer>().material.color = new Color(obsR / 255f, obsG / 255f, obsB / 255f, 1);
+                obstacle.GetComponent<Renderer>().material.color = new Color(R / 255f, G / 255f, B / 255f, 1);
+                Debug.Log(obstacle.GetComponent<Renderer>().material.color);
             }
 
         }
